@@ -27,12 +27,13 @@ class SearchResult extends Component {
 
   render() {
     const { data } = this.state;
+    console.log('data', data);
 
     if (data.length < 1) return (<div>Loading...</div>)
 
     return (
       <div>
-        {data.map((item) => (
+        {data.filter((item) => item.id.kind !== "youtube#channel").map((item) => (
           <Link className="thumbnail-card" key={item.etag} to={{
             pathname: `/watch/${item.id.videoId}`,
             state: { data: data }
