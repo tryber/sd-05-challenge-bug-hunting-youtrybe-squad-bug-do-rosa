@@ -1,71 +1,75 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoPlayerDescription from './VideoPlayer/VideoPlayerDescription';
 import VideoPlayerInfo from './VideoPlayer/VideoPlayerInfo';
 import VideoPlayerComments from './VideoPlayerComments/VideoPlayerComments';
 import VideoSideBar from './VideoSideBar/VideoSideBar';
 import { getVideoInfo, getVideoComments } from './../../../api/service';
+import {Redirect} from 'react-router-dom';
 
-class VideoPage extends Component {
-  constructor(props) {
-    super(props);
+function VideoPage(props) {
 
-    this.state = {
-      videoId: this.props.match.params.videoId,
-      relatedVideos: this.props.location.state.data,
-      videoInfo: null,
-      videoComments: null,
-    };
+  const [ videoId, setVideoId ] = useState(props.match.params.videoId);
+  const [ relatedVideos, setRelatedVideos ] = useState(props.location.state.data);
+  const [ videoInfo, setVideoInfo ] = useState(null);
+  const [ videoComments, setVideoComments] = useState(null);
+  const [ redirect, setRedirect ] = useState(false);
+  const [ stateRedirect, setStateRedirect ] = useState('');
 
-    this.handleSelectedVideo = this.handleSelectedVideo.bind(this)
+  useEffect(() => {
+    getVideoInfo(videoId)
+      .then((data) => setVideoInfo(data.items[0]));
+
+    getVideoComments(videoId)
+      .then((data) => setVideoComments(data.items));
+  }, []);
+
+  useEffect(() => {
+    setRedirect(false);
+  }, [redirect]);
+
+  function handleSelectedVideo(paramVideoId) {
+    setVideoId(paramVideoId);
+    // this.setState({ videoId: paramVideoId })
+    getVideoInfo(videoId)
+      .then((data) => setVideoInfo(data.items[0]));
+
+    getVideoComments(videoId)
+      .then((data) => setVideoComments(data.items));
+    setStateRedirect(paramVideoId);
+    setRedirect(true);
+    // setRedirect(true);
+    // this.setState({stateRedirect: paramVideoId, redirect: true});
+    //  this.props.history.push(`/watch/${videoId}`);
   }
 
-  componentDidMount() {
-    getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
-
-    getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
-  }
-
-  handleSelectedVideo(videoId) {
-    this.setState({ videoId: videoId })
-    getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
-
-    getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
-    this.props.history.push(`/watch/${videoId}`);
-  }
-
-  render() {
-    if (!this.state.videoInfo || !this.state.videoComments)
+    if (redirect) return (<Redirect to={`/watch/${stateRedirect}`} />);
+    if (!videoInfo || !videoComments)
       return <main></main>;
 
     return (
       <main>
         <section className="player">
-          <VideoPlayer embedId={this.state.videoId} />
+          <VideoPlayer embedId={videoId} />
           <VideoPlayerInfo
-            statisticsInfo={this.state.videoInfo.statistics}
-            title={this.state.videoInfo.snippet.title}
+            statisticsInfo={videoInfo.statistics}
+            title={videoInfo.snippet.title}
           />
           <VideoPlayerDescription
-            channelTitle={this.state.videoInfo.snippet.channelTitle}
-            description={this.state.videoInfo.snippet.description}
-            publishedAt={this.state.videoInfo.snippet.publishedAt}
+            channelTitle={videoInfo.snippet.channelTitle}
+            description={videoInfo.snippet.description}
+            publishedAt={videoInfo.snippet.publishedAt}
           />
           <VideoPlayerComments
-            statisticsInfo={this.state.videoInfo.statistics}
-            videoComments={this.state.videoComments}
+            statisticsInfo={videoInfo.statistics}
+            videoComments={videoComments}
           />
         </section>
         <section className="sidebar">
-          <VideoSideBar relatedVideos={this.state.relatedVideos} handleSelectedVideo={this.handleSelectedVideo} />
+          <VideoSideBar relatedVideos={relatedVideos} handleSelectedVideo={handleSelectedVideo} />
         </section>
       </main>
     );
-  }
 }
 
 export default VideoPage;

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import '../../css/featureIcons.css';
 
-class ProfileFeatures extends Component {
-  render() {
+function ProfileFeatures() {
     return (
       <div className="feature-icons">
         <i className="material-icons">video_call</i>
@@ -16,7 +15,6 @@ class ProfileFeatures extends Component {
         </i>
       </div>
     );
-  }
 }
 
 export default ProfileFeatures;

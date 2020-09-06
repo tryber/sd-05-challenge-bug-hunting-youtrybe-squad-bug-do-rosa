@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../css/searchBar.css';
 
-class SearchBar extends Component {
-	constructor(props) {
-		super(props);
+function SearchBar() {
+  const [ searchInput, setSearchInput ] = useState('');
 
-		this.state = {
-      searchInput: '',
-    };
-	}
-
-  handleSearchInput(event) {
-		const { target: { value } } = event;
-    this.setState({ searchInput: value });
+  function handleSearchInput(event) {
+    const { target: { value } } = event;
+    setSearchInput(value);
   }
-
-  render() {
-		const { searchInput } = this.state;
 
     return (
       <div className="searchbar">
@@ -27,8 +18,8 @@ class SearchBar extends Component {
           name="search"
           id="search"
           placeholder="Search"
-          value = {this.searchInput}
-          onChange={(event) => this.handleSearchInput(event)}
+          value = {searchInput}
+          onChange={(event) => handleSearchInput(event)}
         />
         <div className="search-btn">
           <Link
@@ -40,7 +31,6 @@ class SearchBar extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default SearchBar;

@@ -21,19 +21,17 @@ class SearchResult extends Component {
     } = this.props.match;
 
     searchVideos(searchParam).then((data) => {
-      this.setState({ data: data.items });
+      this.setState({ data: data.items.filter((item) => item.id.kind !== "youtube#channel") });
     }).catch(error => this.setState({error: error}))
   }
 
   render() {
     const { data } = this.state;
-    console.log('data', data);
-
     if (data.length < 1) return (<div>Loading...</div>)
 
     return (
       <div>
-        {data.filter((item) => item.id.kind !== "youtube#channel").map((item) => (
+        {data.map((item) => (
           <Link className="thumbnail-card" key={item.etag} to={{
             pathname: `/watch/${item.id.videoId}`,
             state: { data: data }

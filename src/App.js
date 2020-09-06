@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-
+import history from './history';
 import './App.css';
 import './css/mainContents.css';
 
@@ -10,17 +10,16 @@ import SearchResult from './components/content/SearchResult';
 import NotFound from './components/content/NotFound';
 import InitialPage from './components/content/InitialPage';
 
-class App extends Component {
-  render() {
+function App() {
     return (
-      <BrowserRouter>
+      <BrowserRouter >
         <div className="App">
           <Header />
           <Switch>
             <Route exact path="/"><InitialPage /></Route>
             <Route
               exact path="/watch/:videoId"
-              render={(props) => <VideoPage {...props} />}
+              render={(props) => <VideoPage {...props} history={history} />}
             />
             <Route
               exact path="/results/:searchParam"
@@ -31,7 +30,6 @@ class App extends Component {
         </div>
       </BrowserRouter>
     );
-  }
 };
 
 export default App;
