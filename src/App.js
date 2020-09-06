@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import history from './history';
 import './App.css';
 import './css/mainContents.css';
 
@@ -19,7 +18,7 @@ function App() {
           <Route exact path="/"><InitialPage /></Route>
           <Route
             exact path="/watch/:videoId"
-            render={(props) => <VideoPage {...props} history={history} />}
+            render={(props) => <VideoPage {...props} />}
           />
           <Route
             exact path="/results/:searchParam"
