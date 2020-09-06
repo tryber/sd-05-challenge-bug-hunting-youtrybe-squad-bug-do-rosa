@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoPlayerDescription from './VideoPlayer/VideoPlayerDescription';
 import VideoPlayerInfo from './VideoPlayer/VideoPlayerInfo';
@@ -15,6 +16,8 @@ class VideoPage extends Component {
       relatedVideos: this.props.location.state.data,
       videoInfo: null,
       videoComments: null,
+      redirect: false,
+      statusRedirect: '',
     };
 
     this.handleSelectedVideo = this.handleSelectedVideo.bind(this)
@@ -28,17 +31,29 @@ class VideoPage extends Component {
       .then((data) => this.setState({ videoComments: data.items }));
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.redirect !== this.state.redirect) {
+      this.setState({
+        redirect: false,
+        statusRedirect: '',
+      });
+    }
+  }
+
   handleSelectedVideo(videoId) {
     this.setState({ videoId: videoId })
     getVideoInfo(this.state.videoId)
       .then((data) => this.setState({ videoInfo: data.items[0] }));
 
     getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
-    this.props.history.push(`/watch/${videoId}`);
+      .then((data) => this.setState({ videoComments: data.items,
+      redirect: true,
+    statusRedirect: videoId }));
+    // this.props.history.push(`/watch/${videoId}`);
   }
 
   render() {
+    if (this.state.redirect) return <Redirect to={`/watch/${this.state.statusRedirect}`} />;
     if (!this.state.videoInfo || !this.state.videoComments)
       return <main></main>;
 

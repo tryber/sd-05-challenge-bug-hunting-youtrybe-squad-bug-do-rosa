@@ -13,6 +13,7 @@ class VideoSideBar extends Component {
           <Fragment key={video.id.videoId} >
             <div
               className="suggested-video"
+              data-testid="selectedVideo"
               onClick={() => handleSelectedVideo(video.id.videoId)}
             >
               <VideoThumbNail
