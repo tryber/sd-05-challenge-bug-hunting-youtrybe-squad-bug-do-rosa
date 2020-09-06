@@ -43,33 +43,32 @@ function VideoPage(props) {
     //  this.props.history.push(`/watch/${videoId}`);
   }
 
-    if (redirect) return (<Redirect to={`/watch/${stateRedirect}`} />);
-    if (!videoInfo || !videoComments)
-      return <main></main>;
-
-    return (
-      <main>
-        <section className="player">
-          <VideoPlayer embedId={videoId} />
-          <VideoPlayerInfo
-            statisticsInfo={videoInfo.statistics}
-            title={videoInfo.snippet.title}
-          />
-          <VideoPlayerDescription
-            channelTitle={videoInfo.snippet.channelTitle}
-            description={videoInfo.snippet.description}
-            publishedAt={videoInfo.snippet.publishedAt}
-          />
-          <VideoPlayerComments
-            statisticsInfo={videoInfo.statistics}
-            videoComments={videoComments}
-          />
-        </section>
-        <section className="sidebar">
-          <VideoSideBar relatedVideos={relatedVideos} handleSelectedVideo={handleSelectedVideo} />
-        </section>
-      </main>
-    );
+  if (redirect) return (<Redirect to={`/watch/${stateRedirect}`} />);
+  if (!videoInfo || !videoComments)
+    return <main></main>;
+  return (
+    <main>
+      <section className="player">
+        <VideoPlayer embedId={videoId} />
+        <VideoPlayerInfo
+          statisticsInfo={videoInfo.statistics}
+          title={videoInfo.snippet.title}
+        />
+        <VideoPlayerDescription
+          channelTitle={videoInfo.snippet.channelTitle}
+          description={videoInfo.snippet.description}
+          publishedAt={videoInfo.snippet.publishedAt}
+        />
+        <VideoPlayerComments
+          statisticsInfo={videoInfo.statistics}
+          videoComments={videoComments}
+        />
+      </section>
+      <section className="sidebar">
+        <VideoSideBar relatedVideos={relatedVideos} handleSelectedVideo={handleSelectedVideo} />
+      </section>
+    </main>
+  );
 }
 
 export default VideoPage;
