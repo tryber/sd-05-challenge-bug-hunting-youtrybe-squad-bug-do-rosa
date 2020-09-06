@@ -8,9 +8,10 @@ import { searchVideos } from '../../../api/service';
 function SearchResult(props) {
   const [ data, setData ] = useState([]);
   const [ error, setError ] = useState('');
-  const { params: { searchParam } } = props.match;
+
   useEffect(() => {
-    searchVideos(searchParam)
+    // const { params: { searchParam } } = props.match;
+    searchVideos(props.match.params.searchParam)
       .then((data) => setData(data.items.filter((item) => item.id.kind !== "youtube#channel")))
         .catch(error => setError(error));
   }, []);

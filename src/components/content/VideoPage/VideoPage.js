@@ -10,7 +10,7 @@ import {Redirect} from 'react-router-dom';
 function VideoPage(props) {
 
   const [ videoId, setVideoId ] = useState(props.match.params.videoId);
-  const [ relatedVideos, setRelatedVideos ] = useState(props.location.state.data);
+  const [ relatedVideos ] = useState(props.location.state.data);
   const [ videoInfo, setVideoInfo ] = useState(null);
   const [ videoComments, setVideoComments] = useState(null);
   const [ redirect, setRedirect ] = useState(false);
