@@ -1,4 +1,4 @@
-let YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3';
+const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3';
 const YOUTUBE_AUTH_KEY = 'AIzaSyDhirinyMKJGpz_iCspyf0JVF9K6InCgBU';
 
 export const searchVideos = (searchText) => {
@@ -8,10 +8,9 @@ export const searchVideos = (searchText) => {
     resolve(
       fetch(URL)
         .then((data) => data.json())
-        // .then((response) => response.items)
-        .catch(error => reject(error))
+        .catch((error) => reject(error)),
     );
-  })
+  });
 };
 
 export const getVideoInfo = (videoId) => {
@@ -22,10 +21,9 @@ export const getVideoInfo = (videoId) => {
     resolve(
       fetch(URL)
         .then((data) => data.json())
-        // .then((response) => response.items)
-        .catch(error => reject(error))
+        .catch((error) => reject(error)),
     );
-  })
+  });
 };
 
 export const getVideoComments = (videoId) => {
@@ -36,8 +34,7 @@ export const getVideoComments = (videoId) => {
     resolve(
       fetch(URL)
         .then((data) => data.json())
-        // .then((response) => response.items)
-        .catch(error => reject(error))
+        .catch((error) => reject(error)),
     );
-  })
+  });
 };

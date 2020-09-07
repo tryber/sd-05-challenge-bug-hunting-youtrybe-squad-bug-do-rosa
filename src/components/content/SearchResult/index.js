@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import VideoCard from './VideoCard/VideoCard';
 import { Link } from 'react-router-dom';
-
+import VideoCard from './VideoCard/VideoCard';
 import '../../../css/sideBar.css';
 import { searchVideos } from '../../../api/service';
 
 function SearchResult(props) {
-  const [ data, setData ] = useState([]);
-  const [ error, setError ] = useState('');
+  const [data, setData] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // const { params: { searchParam } } = props.match;
     searchVideos(props.match.params.searchParam)
-      .then((data) => setData(data.items.filter((item) => item.id.kind !== "youtube#channel")))
-        .catch(error => setError(error));
+      .then((dataThen) => setData(dataThen.items.filter((item) => item.id.kind !== 'youtube#channel')))
+        .catch((errorCatch) => setError(errorCatch));
   }, []);
 
-  if (data.length < 1) return (<div>Loading...</div>)
+  if (data.length < 1) return (<div>Loading...</div>);
+  if (error !== '') return (<div>Deu erro!</div>);
   return (
     <div>
       {data.map((item) => (
-        <Link className="thumbnail-card" key={item.etag} to={{
-          pathname: `/watch/${item.id.videoId}`,
-          state: { data: data }
-        }}><VideoCard video={item} /></Link>
+        <Link
+          className="thumbnail-card" key={item.etag} to={{
+            pathname: `/watch/${item.id.videoId}`,
+            state: { data },
+          }}
+        >
+          <VideoCard video={item} />
+        </Link>
       ))}
     </div>
   );

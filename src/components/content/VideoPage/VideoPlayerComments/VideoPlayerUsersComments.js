@@ -1,22 +1,39 @@
 import React, { Fragment } from 'react';
-import profileIcon from './../../../../assets/profile.jpg'
+// import profileIcon from './../../../../assets/profile.jpg'
+
+function formatDate(publishedAt) { // colocar o bug aqui de data nao formatada
+  const dateObj = new Date(publishedAt);
+
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+
+  const month = monthNames[dateObj.getMonth()];
+  const day = dateObj.getUTCDate();
+  const year = dateObj.getUTCFullYear();
+
+  return (`Published on ${month} ${day}, ${year}`);
+}
+
+function ButtonUpAndDown(comment) {
+  return (
+    <div>
+      <a className="thumb-up-btn">
+        <i className="material-icons">thumb_up</i>
+        <span className="thumbs-count">
+          {comment.snippet.topLevelComment.snippet.likeCount}
+        </span>
+      </a>
+      <a className="thumb-up-btn">
+        <i className="material-icons">thumb_down</i>
+        <span className="thumbs-count">20</span>
+      </a>
+      <a>REPLY</a>
+    </div>
+  );
+}
 
 function VideoPlayerUsersComments(props) {
-
-  function formatDate(publishedAt) { // colocar o bug aqui de data nao formatada
-    const dateObj = new Date(publishedAt)
-
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
-
-    const month = monthNames[dateObj.getMonth()];
-    const day = dateObj.getUTCDate();
-    const year = dateObj.getUTCFullYear();
-
-    return `Published on ${month} ${day}, ${year}`
-  }
-
   const { videoComments } = props;
   // authorProfileImageUrl
   return (
@@ -34,19 +51,7 @@ function VideoPlayerUsersComments(props) {
                 </span>
               </h3>
               <p>{comment.snippet.topLevelComment.snippet.textDisplay}</p>
-              <div>
-                <a className="thumb-up-btn">
-                  <i className="material-icons">thumb_up</i>
-                  <span className="thumbs-count">
-                    {comment.snippet.topLevelComment.snippet.likeCount}
-                  </span>
-                </a>
-                <a className="thumb-up-btn">
-                  <i className="material-icons">thumb_down</i>
-                  <span className="thumbs-count"></span>
-                </a>
-                <a>REPLY</a>
-              </div>
+              {ButtonUpAndDown(comment)}
             </div>
           </div>
         ))

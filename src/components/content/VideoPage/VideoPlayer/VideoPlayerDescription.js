@@ -1,26 +1,25 @@
 import React from 'react';
 
 function VideoPlayerDescription(props) {
+  function formatDate(publishedAt) {
+    const dateObj = new Date(publishedAt);
 
-  function formatDate(publishedAt){
-    const dateObj = new Date(publishedAt)
-
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
     ];
 
     const month = monthNames[dateObj.getMonth()];
     const day = dateObj.getUTCDate();
     const year = dateObj.getUTCFullYear();
 
-    return `Published on ${month} ${day}, ${year}`
+    return `Published on ${month} ${day}, ${year}`;
   }
 
   const { channelTitle, description, publishedAt } = props;
   return (
-    <section data-testid='channelinfo' className="channel-info">
+    <section data-testid="channelinfo" className="channel-info">
       <div className="avatar">
-        <div></div>
+        <div>avatar</div>
       </div>
       <div className="description">
         <h2>{channelTitle}</h2>

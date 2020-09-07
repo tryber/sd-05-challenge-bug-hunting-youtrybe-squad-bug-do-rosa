@@ -1,9 +1,27 @@
 import React from 'react';
 
+function FewButtons() {
+  return (
+    <div>
+      <a className="share-btn">
+        <i className="material-icons">reply</i>
+        <span>SHARE</span>
+      </a>
+      <a className="save-btn">
+        <i className="material-icons">playlist_add</i>
+        <span>SAVE</span>
+      </a>
+      <a className="options-btn">
+        <i className="material-icons">more_horiz</i>
+      </a>
+    </div>
+  );
+}
+
 function VideoPlayerInfo(props) {
   const { title, statisticsInfo } = props;
   return (
-    <div data-testid='videoinfo' className="video-info">
+    <div data-testid="videoinfo" className="video-info">
       <h1 className="title">
         {title}
       </h1>
@@ -25,18 +43,8 @@ function VideoPlayerInfo(props) {
                 {statisticsInfo.dislikeCount}
               </span>
             </a>
+            <FewButtons />
           </div>
-          <a className="share-btn">
-            <i className="material-icons">reply</i>
-            <span>SHARE</span>
-          </a>
-          <a className="save-btn">
-            <i className="material-icons">playlist_add</i>
-            <span>SAVE</span>
-          </a>
-          <a className="options-btn">
-            <i className="material-icons">more_horiz</i>
-          </a>
         </span>
       </div>
     </div>
