@@ -82,9 +82,9 @@ button {
 
 .thumb-up-btn,
 .thumb-down-btn {
+  align-items: center;
   background-color: white;
   border-style: none;
-  align-items: center;
   display: flex;
   justify-content: space-between;
   margin-right: 1.4rem;

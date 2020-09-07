@@ -39,7 +39,7 @@ function VideoPage(props) {
     getVideoInfo(videoId).then((data) => setVideoInfo(data.items[0]));
 
     getVideoComments(videoId).then((data) => setVideoComments(data.items));
-  }, [videoId]);
+  }, [videoId]); // ref1
 
   useEffect(() => { setRedirect(false); }, [redirect]);
 
@@ -67,3 +67,5 @@ function VideoPage(props) {
 }
 
 export default VideoPage;
+
+//  ref1: https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies
