@@ -9,11 +9,10 @@ function SearchResult(props) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // const { params: { searchParam } } = props.match;
     searchVideos(props.match.params.searchParam)
       .then((dataThen) => setData(dataThen.items.filter((item) => item.id.kind !== 'youtube#channel')))
         .catch((errorCatch) => setError(errorCatch));
-  }, []);
+  }, [props.match.params.searchParam]);
 
   if (data.length < 1) return (<div>Loading...</div>);
   if (error !== '') return (<div>Deu erro!</div>);

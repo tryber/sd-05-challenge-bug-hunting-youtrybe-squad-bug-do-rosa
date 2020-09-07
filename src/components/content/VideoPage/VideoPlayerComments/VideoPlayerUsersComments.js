@@ -18,17 +18,17 @@ function formatDate(publishedAt) { // colocar o bug aqui de data nao formatada
 function ButtonUpAndDown(comment) {
   return (
     <div>
-      <a className="thumb-up-btn">
+      <button className="thumb-up-btn">
         <i className="material-icons">thumb_up</i>
         <span className="thumbs-count">
           {comment.snippet.topLevelComment.snippet.likeCount}
         </span>
-      </a>
-      <a className="thumb-up-btn">
+      </button>
+      <button className="thumb-up-btn">
         <i className="material-icons">thumb_down</i>
         <span className="thumbs-count">20</span>
-      </a>
-      <a>REPLY</a>
+      </button>
+      <span>REPLY</span>
     </div>
   );
 }

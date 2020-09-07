@@ -3,17 +3,17 @@ import React from 'react';
 function FewButtons() {
   return (
     <div>
-      <a className="share-btn">
+      <button className="share-btn">
         <i className="material-icons">reply</i>
         <span>SHARE</span>
-      </a>
-      <a className="save-btn">
+      </button>
+      <button className="save-btn">
         <i className="material-icons">playlist_add</i>
         <span>SAVE</span>
-      </a>
-      <a className="options-btn">
+      </button>
+      <button className="options-btn">
         <i className="material-icons">more_horiz</i>
-      </a>
+      </button>
     </div>
   );
 }
@@ -31,18 +31,18 @@ function VideoPlayerInfo(props) {
       </span>
         <span className="right-menu">
           <div className="thumb-wrapper">
-            <a className="thumb-up-btn">
+            <button className="thumb-up-btn">
               <i className="material-icons">thumb_up</i>
               <span className="thumbs-count">
                 {statisticsInfo.likeCount}
               </span>
-            </a>
-            <a className="thumb-down-btn">
+            </button>
+            <button className="thumb-down-btn">
               <i className="material-icons">thumb_down</i>
               <span className="thumbs-count">
                 {statisticsInfo.dislikeCount}
               </span>
-            </a>
+            </button>
             <FewButtons />
           </div>
         </span>

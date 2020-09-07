@@ -39,7 +39,7 @@ function VideoPage(props) {
     getVideoInfo(videoId).then((data) => setVideoInfo(data.items[0]));
 
     getVideoComments(videoId).then((data) => setVideoComments(data.items));
-  }, []);
+  }, [videoId]);
 
   useEffect(() => { setRedirect(false); }, [redirect]);
 
