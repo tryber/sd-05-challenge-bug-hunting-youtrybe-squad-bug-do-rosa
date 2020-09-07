@@ -6,7 +6,6 @@ import '../../../../css/sideBar.css';
 
 function VideoSideBar(props) {
   const { relatedVideos, handleSelectedVideo } = props;
-  console.log('q saquito', relatedVideos);
   return (
     <Fragment>
       {relatedVideos.map((video) => (
