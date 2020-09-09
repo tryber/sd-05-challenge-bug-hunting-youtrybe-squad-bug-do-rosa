@@ -55,7 +55,7 @@ function VideoPage(props) {
     setRedirect(true);
   }
 
-  if (redirect) return (<Redirect to={ {pathname: `/watch/${stateRedirect}`, state: { data: relatedVideos }} } />);
+  if (redirect) return (<Redirect to={{ pathname: `/watch/${stateRedirect}`, state: { data: relatedVideos } }} />);
   if (!videoInfo || !videoComments) return null;
   return (
     <main>
