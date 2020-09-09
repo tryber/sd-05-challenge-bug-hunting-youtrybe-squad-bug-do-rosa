@@ -41,6 +41,7 @@ function VideoPage(props) {
     getVideoComments(videoId).then((data) => setVideoComments(data.items));
   }, [videoId]); // ref1
 
+
   useEffect(() => { setRedirect(false); }, [redirect]);
 
   function handleSelectedVideo(paramVideoId) {
@@ -54,7 +55,7 @@ function VideoPage(props) {
     setRedirect(true);
   }
 
-  if (redirect) return (<Redirect to={`/watch/${stateRedirect}`} />);
+  if (redirect) return (<Redirect to={ {pathname: `/watch/${stateRedirect}`, state: { data: relatedVideos }} } />);
   if (!videoInfo || !videoComments) return null;
   return (
     <main>
