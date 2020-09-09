@@ -3,6 +3,11 @@ main {
   padding: 2.5rem 7.5rem;
 }
 
+button {
+  background-color: white;
+  border: none;
+}
+
 .player {
   display: block;
   margin-right: 2.5rem;
@@ -50,6 +55,8 @@ main {
 }
 
 .right-menu .share-btn .material-icons {
+  background-color: white;
+  border-style: none;
   transform: scale(-1, 1);
 }
 
@@ -76,6 +83,8 @@ main {
 .thumb-up-btn,
 .thumb-down-btn {
   align-items: center;
+  background-color: white;
+  border-style: none;
   display: flex;
   justify-content: space-between;
   margin-right: 1.4rem;

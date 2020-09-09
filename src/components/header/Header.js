@@ -6,7 +6,7 @@ import ProfileFeatures from './ProfileFeatures';
 
 import '../../css/navbar.css';
 
-const Header = () => {
+function Header() {
   return (
     <nav className="nav">
       <Menu />
@@ -14,6 +14,6 @@ const Header = () => {
       <ProfileFeatures />
     </nav>
   );
-};
+}
 
 export default Header;
